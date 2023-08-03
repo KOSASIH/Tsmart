@@ -1,0 +1,30 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+name: tsmart
+services:
+  postgresql:
+    extends:
+      file: ./postgresql.yml
+      service: postgresql
+  elasticsearch:
+    extends:
+      file: ./elasticsearch.yml
+      service: elasticsearch
+  keycloak:
+    extends:
+      file: ./keycloak.yml
+      service: keycloak
+  jhipster-registry:
+    extends:
+      file: ./jhipster-registry.yml
+      service: jhipster-registry
+    depends_on:
+      keycloak:
+        condition: service_healthy
+  kafka:
+    extends:
+      file: ./kafka.yml
+      service: kafka
+  zookeeper:
+    extends:
+      file: ./kafka.yml
+      service: zookeeper
